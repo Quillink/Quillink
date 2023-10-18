@@ -1,0 +1,3 @@
+# Shard
+
+## Note-taking app
