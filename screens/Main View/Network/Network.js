@@ -1,10 +1,13 @@
 import React from 'react';
-import Node from './Node';
-import Node1 from './Node1';
+import Nodes from './Nodes';
+import Lines from './Lines';
 
 function Network(props) {
     return (
-        <Node1 />
+        <div>
+            <Nodes />
+            <Lines />
+        </div>
     );
 }
 
