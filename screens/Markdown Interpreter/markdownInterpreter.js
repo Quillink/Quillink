@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import showdown from 'showdown';
-import './App.css'; // You can name your CSS file as App.css
+import './markdownInterpreter.css'; // You can name your CSS file as App.css
 
 function App() {
   const [isPreview, setIsPreview] = useState(false);
