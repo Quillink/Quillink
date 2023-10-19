@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {StyleSheet, Button, Pressable} from 'react-native';
 import Network from './Network/Network';
-import Editor from './Markdown Interpreter/App';
+import Editor from './Markdown Interpreter/markdownInterpreter';
 import { firebase } from '../../config';
 import { doc, getDoc, setDoc } from "firebase/firestore"; 
 
