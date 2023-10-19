@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import showdown from 'showdown';
+<<<<<<<< HEAD:screens/Main View/Markdown Interpreter/App.js
 import './App.css'; // You can name your CSS file as App.css
 import { firebase } from '../../../config'
 import { doc, updateDoc } from 'firebase/firestore'
+========
 import './markdownInterpreter.css'; // You can name your CSS file as App.css
+>>>>>>>> b2816f54eddd2c5735fc3a56e4b9a98f6cad0457:screens/Main View/Markdown Interpreter/markdownInterpreter.js
 
 const db = firebase.firestore().collection("Nodes")
 

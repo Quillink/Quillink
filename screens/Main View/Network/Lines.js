@@ -20,7 +20,6 @@ const Lines = () => {
 
     useEffect(() => {
         Fetchdata();
-        console.log("Ransomething");
     }, [])
 
     for (let i = 0, count = 0; i < info.length - 1; i++) // append lines into lineslist

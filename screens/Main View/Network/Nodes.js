@@ -18,7 +18,6 @@ const Nodes = () => {
 
     useEffect(() => {
         Fetchdata();
-        console.log("Ransomething");
     }, [])
 
     return (
