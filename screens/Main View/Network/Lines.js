@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import { firebase } from '../../../config'
 
 
@@ -7,10 +7,6 @@ const db = firebase.firestore().collection('Nodes');
 const Lines = () => {
     const [info, setInfo] = useState([]);
     let linesList = [];
-
-    window.addEventListener('load', () => { // fetch everytime window loads
-        Fetchdata();
-    });
  
     const Fetchdata = () => {
         db.where("tags", 'array-contains', "Home").get().then((querySnapshot) => {
@@ -22,13 +18,14 @@ const Lines = () => {
         })
     }
 
-    console.log(info);
+    useEffect(() => {
+        Fetchdata();
+    }, [])
 
     for (let i = 0, count = 0; i < info.length - 1; i++) // append lines into lineslist
     {
         for (let j = i+1; j < info.length; j++)
         {
-            console.log(info[i].position[1]);
             linesList[i] = info.map((index) => {
                 return (
                     <svg key = {++count} style={{position:'absolute'}} height="100%" width="100%" >

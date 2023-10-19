@@ -1,16 +1,12 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import { firebase } from '../../../config'
 
 
 const db = firebase.firestore().collection('Nodes');
 const Nodes = () => {
     const [info, setInfo] = useState([]);
-
-    window.addEventListener('load', () => { // fetch everytime window loads
-        Fetchdata();
-    });
  
-    const Fetchdata = () => {
+    const Fetchdata = async () => {
         db.get().then((querySnapshot) => {
             querySnapshot.forEach(element => {
                 var data = element.data();
@@ -19,6 +15,10 @@ const Nodes = () => {
             });
         })
     }
+
+    useEffect(() => {
+        Fetchdata();
+    }, [])
 
     return (
         <div>
