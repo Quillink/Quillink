@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {StyleSheet, Button, Pressable} from 'react-native';
-import Network from './Network/Network';
-import Editor from './Markdown Interpreter/markdownInterpreter';
+import Network from '../../Components/Network/Network';
+import Editor from '../../Components/Markdown Interpreter/markdownInterpreter';
 import { firebase } from '../../config';
 import { doc, getDoc, setDoc } from "firebase/firestore"; 
 
@@ -19,8 +19,8 @@ function HomeScreen(props) {
             // add new node to db
             db.add({
                 title: "New Node",
-                position: [Math.random() * 1000, Math.random() * 1000],
-                tags: [],
+                position: [Math.random() * 800, Math.random() * 800],
+                tags: ["Home"],
                 md: ""
             }).then((docRef) => {
                 setDocId(docRef.id);

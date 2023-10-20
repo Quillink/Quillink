@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import showdown from 'showdown';
-import { firebase } from '../../../config'
+import { firebase } from '../../config'
 import { doc, updateDoc } from 'firebase/firestore'
 import './markdownInterpreter.css'; // You can name your CSS file as App.css
 

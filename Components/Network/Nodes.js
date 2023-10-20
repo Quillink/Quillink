@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import { firebase } from '../../../config'
+import { firebase } from '../../config'
 
 
 const db = firebase.firestore().collection('Nodes');
@@ -11,7 +11,6 @@ const Nodes = () => {
             querySnapshot.forEach(element => {
                 var data = element.data();
                 setInfo(arr => [...arr, data]);
- 
             });
         })
     }
