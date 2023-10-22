@@ -11,30 +11,33 @@ const db = firebase.firestore().collection('Nodes');
 function HomeScreen(props) {
 
     const [isGraph, setIsGraph] = useState(true);
-    const [docId, setDocId] = useState();
+    const [docId, setDocId] = useState("");
 
-    function setGraph() {
+    function setGraph(Id) {
         if (isGraph == true)
         {
-            // add new node to db
-            db.add({
-                title: "New Node",
-                position: [Math.random() * 800, Math.random() * 800],
-                tags: ["Home"],
-                md: ""
-            }).then((docRef) => {
-                setDocId(docRef.id);
-            })
+            if (typeof Id == "string") setDocId(Id);
+            else {
+                db.add({
+                    title: "New Node",
+                    md: "",
+                    position: [Math.random() * 800, Math.random() * 800],
+                    tags: ["Chore"]
+                }).then((docRef) => {
+                    setDocId(docRef.id)
+                })
+            }
             setIsGraph(!isGraph);
         } else {
             setIsGraph(!isGraph);
         }
     }
+    console.log(docId)
 
     return (
         <div style={styles.main}>
             <Pressable style={styles.btn} onPress={setGraph}><p>Create Node</p></Pressable>
-            {isGraph ? <Network /> : <Editor id={docId} />}
+            {isGraph ? <Network func={setGraph} /> : <Editor id={docId} />}
         </div>
     );
 }

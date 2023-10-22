@@ -6,13 +6,12 @@ const db = firebase.firestore().collection('Nodes');
 
 function Lines(props) {
     const [info, setInfo] = useState([]);
-    let [tags, setTags] = useState([]);
 
     
     
     let linesList = [];
     const Fetchdata = async (copy, tags, i) => {
-        copy[i] = [];
+        copy.push([]);
         db.where("tags", 'array-contains', tags).get().then((querySnapshot) => {
             querySnapshot.forEach((element, index) => {
                 var data = element.data();
@@ -33,6 +32,7 @@ function Lines(props) {
 
     for (let k = 0, count = 0; k < info.length; k++)
     {
+        console.log(info)
         for (let i = 0; i < info[k].length; i++) // append lines into lineslist
         {
             for (let j = i+1; j < info[k].length; j++)
