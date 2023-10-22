@@ -1,4 +1,4 @@
-import { firebase } from '../config';
+import { firebase } from '../../../../config';
 
 const folderCollection = firebase.firestore().collection('Folders');
 const fileCollection = firebase.firestore().collection('Nodes');
