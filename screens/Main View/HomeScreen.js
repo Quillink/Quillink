@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import {StyleSheet, Button, Pressable} from 'react-native';
+import { StyleSheet, Button, Pressable } from 'react-native';
 import Network from '../../Components/Network/Network';
 import Editor from '../../Components/Markdown Interpreter/markdownInterpreter';
+import Folder from '../Sidebar/components/Folder';
 import { firebase } from '../../config';
-import { doc, getDoc, setDoc } from "firebase/firestore"; 
-
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import addNode from '../Sidebar/hooks/addNode';
+import explorer from '../Sidebar/data/folderData';
 
 const db = firebase.firestore().collection('Nodes');
 
@@ -14,8 +16,7 @@ function HomeScreen(props) {
     const [docId, setDocId] = useState("");
 
     function setGraph(Id) {
-        if (isGraph == true)
-        {
+        if (isGraph == true) {
             if (typeof Id == "string") setDocId(Id);
             else {
                 db.add({
@@ -36,21 +37,28 @@ function HomeScreen(props) {
 
     return (
         <div style={styles.main}>
-            <Pressable style={styles.btn} onPress={setGraph}><p>Create Node</p></Pressable>
-            {isGraph ? <Network func={setGraph} /> : <Editor id={docId} />}
+            <div style={styles.sidebar}>
+                <Folder handleInsertNode={addNode} explorer={explorer} />
+            </div>
+            <div>
+                <Pressable style={styles.btn} onPress={setGraph}>
+                    <p>Create Node</p>
+                </Pressable>
+                {isGraph ? <Network func={setGraph} /> : <Editor id={docId} />}
+            </div>
         </div>
     );
 }
 
 const styles = StyleSheet.create({
     main: {
-      flex: 1,
-      zIndex: 1,
-      width: 1000,
-      height: 1000,
-      backgroundColor: '#191919',
-      alignItems: 'center',
-      justifyContent: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        flex: 1,
+        zIndex: 1,
+        width: 1000,
+        height: 1000,
+        backgroundColor: '#191919',
     },
     btn: {
         flex: 1,
@@ -60,7 +68,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-      },
+    },
+    sidebar: {
+        display: 'flex',
+        backgroundColor: 'red',
+        minWidth: '200px'
+    }
 });
 
 export default HomeScreen;
