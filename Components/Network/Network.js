@@ -5,7 +5,7 @@ import Lines from './Lines';
 function Network(props) {
     return (
         <div>
-            <Nodes />
+            <Nodes func={props.func} />
             <Lines />
         </div>
     );
