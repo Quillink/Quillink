@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
         zIndex: 1,
-        width: 1000,
-        height: 1000,
+        width: '100%',
+        height: '100%',
         backgroundColor: '#191919',
     },
     btn: {
