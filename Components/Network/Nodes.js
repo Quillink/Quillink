@@ -1,25 +1,15 @@
 import {React, useState, useEffect} from 'react';
 import { Pressable } from 'react-native';
 import { firebase } from '../../config';
-import Editor from '../Markdown Interpreter/markdownInterpreter';
-import HomeScreen from '../../screens/Main View/HomeScreen';
+import {fetchAllData} from '../../Hooks/Network/fetchData';
 
 
 const db = firebase.firestore().collection('Nodes');
 function Nodes (props) {
     const [info, setInfo] = useState([]);
- 
-    const Fetchdata = async () => {
-        db.get().then((querySnapshot) => {
-            querySnapshot.forEach(element => {
-                var data = element;
-                setInfo(arr => [...arr, data]);
-            });
-        })
-    }
 
     useEffect(() => {
-        Fetchdata();
+        fetchAllData(setInfo);
     }, [])
 
     return (

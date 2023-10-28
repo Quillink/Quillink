@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, Pressable } from 'react-native';
-import Network from '../../Components/Network/Network';
-import Editor from '../../Components/Markdown Interpreter/markdownInterpreter';
-import Folder from '../Sidebar/components/Folder';
-import { firebase } from '../../config';
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import addNode from '../Sidebar/hooks/addNode';
-import explorer from '../Sidebar/data/folderData';
+import { StyleSheet, Pressable } from 'react-native';
+import Network from '../Components/Network/Network';
+import Editor from '../Components/Markdown Interpreter/markdownInterpreter';
+import Folder from '../Components/Sidebar/Folder';
+import { firebase } from '../config';
+import addNode from '../Hooks/Sidebar/addNode';
+import explorer from '../data/folderData';
 
 const db = firebase.firestore().collection('Nodes');
 
@@ -28,12 +27,9 @@ function HomeScreen(props) {
                     setDocId(docRef.id)
                 })
             }
-            setIsGraph(!isGraph);
-        } else {
-            setIsGraph(!isGraph);
         }
+        setIsGraph(!isGraph);
     }
-    console.log(docId)
 
     return (
         <div style={styles.main}>
