@@ -1,5 +1,5 @@
-import {React, useState, useLayoutEffect, useEffect} from 'react';
-import {fetchTaggedData} from '../../Hooks/Network/fetchData';
+import { React, useState, useLayoutEffect, useEffect } from 'react';
+import { fetchTaggedData } from '../../Hooks/Network/fetchData';
 import { firebase } from '../../config'
 import drawLines from '../../Hooks/Network/drawLines'
 

@@ -2,7 +2,7 @@ import { firebase } from '../../config'
 
 const db = firebase.firestore().collection('Nodes');
 
-async function fetchTaggedData (copy, tags, i, f) {
+async function fetchTaggedData(copy, tags, i, f) {
     copy.push([]);
     db.where("tags", 'array-contains', tags).get().then((querySnapshot) => {
         querySnapshot.forEach((element, index) => {

@@ -10,13 +10,13 @@ const useFetch = (id) => {
   const [value, setValue] = useState("");
 
   useEffect(
-      () => {
-        const get = async() => {
-          const response = await db.doc(id).get().then((doc) => doc.data());
-          const data = await response.md;
-          setValue(data);
-        }
-        get();
+    () => {
+      const get = async () => {
+        const response = await db.doc(id).get().then((doc) => doc.data());
+        const data = await response.md;
+        setValue(data);
+      }
+      get();
     }, [value]
   );
 
@@ -29,7 +29,7 @@ function Editor(props) {
 
   const [isPreview, setIsPreview] = useState(false);
   const [markdownText, setMarkdownText] = useState(remoteMd);
-  
+
   function setMd(val) {
     setMarkdownText(val);
     db.doc(props.id).update({
