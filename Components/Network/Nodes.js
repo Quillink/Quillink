@@ -16,7 +16,23 @@ function Nodes(props) {
         <div style={{ position: 'relative' }}>
             {
                 info.map((data, index) => (
-                    <Pressable onPress={() => props.func(data.id)} style={{ zIndex: 2, width: 100, height: 50, color: "black", backgroundColor: "powderblue", position: 'absolute', left: data.data().position[0], top: data.data().position[1] }} key={index}><p>{data.data().title}</p></Pressable>
+                    <Pressable onPress={() => props.func(data.id)}
+                    style={{
+                        zIndex: 2,
+                        width: 20,
+                        aspectRatio: 1,
+                        display: "flex",
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        borderRadius: "50%",
+                        color: "#dcedfe",
+                        backgroundColor: "#f9860b",
+                        position: 'absolute',
+                        left: data.data().position[0],
+                        top: data.data().position[1]
+                    }}
+                    key={index}><p style={{ marginTop: "30px" }}>{data.data().title}</p></Pressable>
                 ))
             }
         </div>

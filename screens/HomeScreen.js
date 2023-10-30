@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, Pressable, RootTagContext } from 'react-native';
 import Network from '../Components/Network/Network';
 import Editor from '../Components/Markdown Interpreter/markdownInterpreter';
 import Folder from '../Components/Sidebar/Folder';
@@ -37,8 +37,8 @@ function HomeScreen(props) {
                 <Folder handleInsertNode={addNode} explorer={explorer} />
             </div>
             <div>
-                <Pressable style={styles.btn} onPress={setGraph}>
-                    <p>Create Node</p>
+                <Pressable style={styles.create_node_btn} onPress={setGraph}>
+                    <p>+</p>
                 </Pressable>
                 {isGraph ? <Network func={setGraph} /> : <Editor id={docId} />}
             </div>
@@ -54,20 +54,27 @@ const styles = StyleSheet.create({
         zIndex: 1,
         width: '100%',
         height: '100%',
-        backgroundColor: '#191919',
+        backgroundColor: '#011123',
     },
-    btn: {
-        flex: 1,
+    create_node_btn: {
         zIndex: 1,
-        marginBottom: 300,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: "60px",
+        aspectRatio: 1,
+        backgroundColor: "#e57906",
+        right: 0,
+        bottom: 0,
         position: 'absolute',
+        display: 'flex',
+        marginRight: "30px",
+        marginBottom: "30px",
+        borderRadius: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '45px'
     },
     sidebar: {
         display: 'flex',
-        backgroundColor: 'red',
+        backgroundColor: '#011b37',
         minWidth: '200px'
     }
 });
