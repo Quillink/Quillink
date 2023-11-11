@@ -62,6 +62,7 @@ function Editor(props) {
             placeholder="Write your Markdown here..."
             value={markdownText}
             onChange={(e) => setMd(e.target.value)}
+            
           />
         </div>
         <div id="preview" className="preview" style={{ display: isPreview ? 'block' : 'none' }} dangerouslySetInnerHTML={{ __html: html }} />

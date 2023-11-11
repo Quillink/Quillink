@@ -1,5 +1,5 @@
 body {
-  font-family: 'consolas';
+  font-family:  Georgia, 'Times New Roman', Times, serif;
   background-color: rgb(68, 68, 68);
   overflow: hidden;
 }
@@ -7,7 +7,7 @@ body {
 .editor-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
 }
 
 .editor,
@@ -18,6 +18,11 @@ body {
 
 .preview {
   border: 1px solid #ccc;
+  background-color: rgb(68, 68, 68);
+  padding: 10px;
+  margin-left: 10px;
+  width: 140vh;
+  height: 90vh;
   display: none;
 }
 
@@ -27,7 +32,8 @@ button {
 
 #markdown-input {
   overflow: hidden;
-  width: 90%;
+  width: 140vh;
   height: 90vh;
-  background-color: rgb(122, 122, 122);
+  background-color: rgb(155, 114, 114);
+  resize: none;
 }
