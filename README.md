@@ -1,3 +1,3 @@
-# Shard
+# Quillink
 
 ## Note-taking app
