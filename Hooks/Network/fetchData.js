@@ -1,25 +1,19 @@
-import { firebase } from '../../config'
+import {useEffect} from 'react';
 
-const db = firebase.firestore().collection('Nodes');
-
-async function fetchTaggedData(copy, tags, i, f) {
-    copy.push([]);
-    db.where("tags", 'array-contains', tags).get().then((querySnapshot) => {
-        querySnapshot.forEach((element, index) => {
-            var data = element.data();
-            copy[i].push(data);
-            f(copy);
+function fetchData(db, setNodes, setLinks) {
+    useEffect(() => {
+        db.collection("nodes").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setNodes(nodes => [...nodes, {id: doc.id}]);
+            });
         });
-    })
+
+        db.collection("links").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setLinks(links => [...links, {source: doc.data().source, target: doc.data().target}]);
+            });
+        });
+    }, [])
 }
 
-async function fetchAllData(f) {
-    db.get().then((querySnapshot) => {
-        querySnapshot.forEach(element => {
-            var data = element;
-            f(arr => [...arr, data]);
-        });
-    })
-}
-
-export { fetchTaggedData, fetchAllData };
+export default fetchData;

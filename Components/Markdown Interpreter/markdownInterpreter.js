@@ -4,15 +4,13 @@ import { firebase } from '../../config'
 import { doc, updateDoc } from 'firebase/firestore'
 import './markdownInterpreter.css';
 
-const db = firebase.firestore().collection("Nodes")
-
-const useFetch = (id) => {
+const useFetch = (id, db) => {
   const [value, setValue] = useState("");
 
   useEffect(
     () => {
       const get = async () => {
-        const response = await db.doc(id).get().then((doc) => doc.data());
+        const response = await db.collection("nodes").doc(id).get().then((doc) => doc.data());
         const data = await response.md;
         setValue(data);
       }
@@ -25,14 +23,14 @@ const useFetch = (id) => {
 
 function Editor(props) {
 
-  const remoteMd = useFetch(props.id)
+  const remoteMd = useFetch(props.id, props.db)
 
-  const [isPreview, setIsPreview] = useState(false);
+  const [isPreview, setIsPreview] = useState(true);
   const [markdownText, setMarkdownText] = useState(remoteMd);
 
   function setMd(val) {
     setMarkdownText(val);
-    db.doc(props.id).update({
+    props.db.collection("nodes").doc(props.id).update({
       md: val
     })
   }

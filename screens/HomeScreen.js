@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
-import { StyleSheet, Pressable, RootTagContext } from 'react-native';
-import Network from '../Components/Network/Network';
+import { StyleSheet, Pressable } from 'react-native';
+import { firebase } from '../config';
+
+import GraphView from '../Components/Network/GraphView';
 import Editor from '../Components/Markdown Interpreter/markdownInterpreter';
 import Folder from '../Components/Sidebar/Folder';
-import { firebase } from '../config';
+import addFile from '../Hooks/Network/addFile'
+
 import addNode from '../Hooks/Sidebar/addNode';
 import explorer from '../data/folderData';
 
-const db = firebase.firestore().collection('Nodes');
 
 function HomeScreen(props) {
 
-    const [isGraph, setIsGraph] = useState(true);
-    const [docId, setDocId] = useState("");
+    const [viewState, setViewState] = useState("GRAPH_VIEW");
 
-    function setGraph(Id) {
-        if (isGraph == true) {
-            if (typeof Id == "string") setDocId(Id);
-            else {
-                db.add({
-                    title: "New Node",
-                    md: "",
-                    position: [Math.random() * 800, Math.random() * 800],
-                    tags: ["Chore"]
-                }).then((docRef) => {
-                    setDocId(docRef.id)
-                })
-            }
+    const [docId, setDocId] = useState(undefined);
+    const db = firebase.firestore().collection("Users").doc(props.user.uid);
+
+    function switchView(id) {
+        if (id != undefined || viewState == "EDITOR_VIEW") {
+            setDocId(id);
+            setViewState(viewState == "GRAPH_VIEW" ? "EDITOR_VIEW" : "GRAPH_VIEW")
         }
-        setIsGraph(!isGraph);
+        else {
+            // TODO: combine addNode from Hooks/Sidebar and this into one function.
+            addFile(db, setDocId, viewState, setViewState)
+
+            setViewState("EDITOR_VIEW")
+        }
     }
 
     return (
@@ -37,10 +37,10 @@ function HomeScreen(props) {
                 <Folder handleInsertNode={addNode} explorer={explorer} />
             </div>
             <div>
-                <Pressable style={styles.create_node_btn} onPress={setGraph}>
+                <Pressable style={styles.create_node_btn} onPress={() => switchView()}>
                     <p>+</p>
                 </Pressable>
-                {isGraph ? <Network func={setGraph} /> : <Editor id={docId} />}
+                {viewState == "GRAPH_VIEW" ? <GraphView db={db} switchView={switchView} /> : <Editor db={db} id={docId} />}
             </div>
         </div>
     );

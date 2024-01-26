@@ -1,11 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
+import AuthScreen from './screens/AuthScreen'
+import useAuth from './Hooks/Auth/useAuth';
 
 export default function App() {
   
-  return (
-    <HomeScreen />
-  );
+  const {user} = useAuth();
+
+  if (user) return (<HomeScreen user={user} />)
+  else return (<AuthScreen />)
 }
 

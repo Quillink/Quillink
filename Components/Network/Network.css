@@ -1,0 +1,11 @@
+.link {
+  stroke: orange;
+  stroke-opacity: 50%;
+  stroke-width: 5px;
+  stroke-linecap: round;
+  z-index: -10;
+}
+
+circle {
+  fill: orange;
+}
